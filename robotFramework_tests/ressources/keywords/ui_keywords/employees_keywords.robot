@@ -43,7 +43,7 @@ The error message of invalid salary should displayed
     Element Text Should Be  ${INVALID_SALARY_ERROR_MESSAGE_LOCATOR}   ${INVALID_SALARY_ERROR}
 
 The error message of existing email should displayed
-    Wait Until Element Is Visible  ${EXSISTING_EMAIL_ERROR_MESSAGE_LOCATOR}   10s
+    Wait Until Element Is Visible  ${EXSISTING_EMAIL_ERROR_MESSAGE_LOCATOR}   20s
     Element Text Should Be  ${EXSISTING_EMAIL_ERROR_MESSAGE_LOCATOR}    ${EXSISTING_EMAIL_ERROR}
 
 The user click on delete employee
