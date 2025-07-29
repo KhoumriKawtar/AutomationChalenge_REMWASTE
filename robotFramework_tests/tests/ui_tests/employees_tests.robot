@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    CRUD ui emplyee tests
+Documentation    CRUD UI employee tests
 Metadata         Author     Kawtar KHOUMRI
 Resource  ../../ressources/keywords/ui_keywords/login_keywords.robot
 Resource  ../../ressources/keywords/ui_keywords/employees_keywords.robot
