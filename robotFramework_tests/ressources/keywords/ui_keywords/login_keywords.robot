@@ -8,11 +8,8 @@ Library           SeleniumLibrary
 User is in the login page
     [Arguments]  ${URL}
     ${options}=    Evaluate    selenium.webdriver.chrome.options.Options()    modules=selenium
-    ${rand}=       Evaluate    __import__('random').randint(1000, 9999)
-    ${profile_dir}=    Set Variable    /tmp/chrome-${rand}
     Call Method    ${options}    add_argument    --headless
     Call Method    ${options}    add_argument    --disable-gpu
-    Call Method    ${options}    add_argument    --user-data-dir=${profile_dir}
     Create WebDriver    Chrome    options=${options}
     Go To    ${URL}
 
