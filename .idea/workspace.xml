@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c84997f-63e4-4266-8ed2-f67a659a63c1" name="Changes" comment="" />
+    <list default="true" id="3c84997f-63e4-4266-8ed2-f67a659a63c1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/robotFramework_tests/ressources/variables/ui_variables/employees_variables.robot" beforeDir="false" afterPath="$PROJECT_DIR$/robotFramework_tests/ressources/variables/ui_variables/employees_variables.robot" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
