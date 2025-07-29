@@ -6,12 +6,14 @@ Library           SeleniumLibrary
 
 *** Keywords ***
 User is in the login page
-   [Arguments]  ${URL}
+    [Arguments]  ${URL}
     ${options}=    Evaluate    selenium.webdriver.chrome.options.Options()    modules=selenium
-    #Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --headless
     Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --user-data-dir=/tmp/chrome-${RANDOM}
     Create WebDriver    Chrome    options=${options}
     Go To    ${URL}
+
 The user enter the user name
    [Arguments]  ${WRONG_USERNAME}
       Wait Until Element Is Visible  ${USER_NAME_LOCATOR}  10s
