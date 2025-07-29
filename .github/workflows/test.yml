@@ -1,0 +1,68 @@
+name: Run Robot Framework Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework robotframework-seleniumlibrary robotframework-requests
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+')
+          echo "Chrome Version: $CHROME_VERSION"
+          CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip"
+          echo "Downloading ChromeDriver from: $CHROMEDRIVER_URL"
+          curl -O $CHROMEDRIVER_URL
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Verify ChromeDriver
+        run: |
+          echo "ChromeDriver Path: $(which chromedriver)"
+          chromedriver --version
+
+      - name: Start backend
+        run: |
+          cd TODO_APP/backend
+          npm install
+          nohup node server.js &
+
+      - name: Start frontend
+        run: |
+          cd TODO_APP/frontend
+          npm install
+          nohup npm start &
+
+      - name: Wait for app to start
+        run: sleep 15
+
+      - name: Run API tests
+        run: robot -d robotFramework_tests/output robotFramework_tests/tests/api_tests
+
+      - name: Run UI tests
+        run: robot -d robotFramework_tests/output robotFramework_tests/tests/ui_tests
+
